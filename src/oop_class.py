@@ -19,11 +19,13 @@ class Category:
     description: str
     products: list
     total_categories = 0
+    total_products = 0
 
     def __init__(self, name, description):
         self.name = name
         self.description = description
         self.products = []
+        Category.total_products += 1
         Category.total_categories += 1
 
 
@@ -38,5 +40,6 @@ if __name__ == "__main__":
     # Теперь ты можешь проверить список продуктов в категории
     for product in category.products:
         print(
-            f"Название продукта: {product.name}, Описание: {product.description}, Цена: {product.price}, Количество: {product.quantity}"
+            f"Название продукта: {product.name}, Описание: {product.description}, Цена: {product.price}, "
+            f"Количество: {product.quantity}"
         )
