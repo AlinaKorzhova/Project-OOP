@@ -1,9 +1,10 @@
 class Product:
-    """"""
+    """Класс и атрибуты """
+
     name: str
     description: str
     price: float
-    quantity :str
+    quantity: str
 
     def __init__(self, name, description, price, quantity):
         self.name = name
@@ -13,6 +14,7 @@ class Product:
 
 
 class Category:
+    """Класс и  атрибуты"""
     name: str
     description: str
     products: list
@@ -36,4 +38,5 @@ if __name__ == "__main__":
     # Теперь ты можешь проверить список продуктов в категории
     for product in category.products:
         print(
-            f"Название продукта: {product.name}, Описание: {product.description}, Цена: {product.price}, Количество: {product.quantity}")
+            f"Название продукта: {product.name}, Описание: {product.description}, Цена: {product.price}, Количество: {product.quantity}"
+        )
