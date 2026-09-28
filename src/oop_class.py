@@ -26,7 +26,10 @@ class Category:
         self.description = description
         self.products = []
         Category.total_products += 1
-        Category.total_categories += 1
+
+    def add_product(self, product):
+        self.products.append(product)
+        Category.total_products += 1
 
 
 if __name__ == "__main__":
