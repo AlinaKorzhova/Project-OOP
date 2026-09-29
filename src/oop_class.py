@@ -1,12 +1,10 @@
 class Product:
-    """Класс и атрибуты """
-
     name: str
     description: str
     price: float
-    quantity: str
+    quantity: int
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         self.name = name
         self.description = description
         self.price = price
@@ -14,39 +12,32 @@ class Product:
 
 
 class Category:
-    """Класс и  атрибуты"""
-    name: str
-    description: str
-    products: list
-    total_categories = 0
-    total_products = 0
+    category_count = 0
+    product_count = 0
 
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str, products: list | None = None) -> None:
         self.name = name
         self.description = description
-        self.products = []
-        Category.total_products += 1
-
-    def add_product(self, products):
         self.products = products if products is not None else []
 
-        Category.total_products += 1
-        Category.total_products += len(self.products)
+        Category.category_count += 1
+        Category.product_count += len(self.products)
+
+    @classmethod
+    def total_products(cls) -> int:
+        return cls.product_count
 
 
 if __name__ == "__main__":
     product1 = Product("Огурец", "Овощ", 100.0, 5)
     product2 = Product("Банан", "Фрукт", 50.0, 10)
 
-    category = Category("Фрукты", "Разные фрукты")
-    category.products.append(product1)
-    category.products.append(product2)
+    category = Category("Фрукты", "Разные фрукты", [product1, product2])
 
-    print(Category.total_products)
+    print(Category.total_products())
 
-    # Теперь ты можешь проверить список продуктов в категории
     for product in category.products:
         print(
-            f"Название продукта: {product.name}, Описание: {product.description}, Цена: {product.price}, "
-            f"Количество: {product.quantity}"
+            f"Название продукта: {product.name}, Описание: {product.description}, "
+            f"Цена: {product.price}, Количество: {product.quantity}"
         )

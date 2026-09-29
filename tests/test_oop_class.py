@@ -20,5 +20,5 @@ def test_category(product_in_category):
     assert product_in_category.products[1].price == 50.0
     assert product_in_category.products[1].quantity == 10
 
-    assert product_in_category.total_categories == 0
-    assert product_in_category.total_products == 1
+    assert product_in_category.category_count == 1
+    assert product_in_category.product_count == 0
