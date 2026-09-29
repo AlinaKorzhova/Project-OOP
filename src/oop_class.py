@@ -27,9 +27,11 @@ class Category:
         self.products = []
         Category.total_products += 1
 
-    def add_product(self, product):
-        self.products.append(product)
+    def add_product(self, products):
+        self.products = products if products is not None else []
+
         Category.total_products += 1
+        Category.total_products += len(self.products)
 
 
 if __name__ == "__main__":
@@ -39,6 +41,8 @@ if __name__ == "__main__":
     category = Category("Фрукты", "Разные фрукты")
     category.products.append(product1)
     category.products.append(product2)
+
+    print(Category.total_products)
 
     # Теперь ты можешь проверить список продуктов в категории
     for product in category.products:
