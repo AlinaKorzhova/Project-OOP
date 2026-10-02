@@ -1,4 +1,3 @@
-from src.oop_class import Product, Category
 def test_product(product1):
     assert product1.name == "Огурец"
     assert product1.description == "Овощ"
@@ -21,4 +20,5 @@ def test_category(product_in_category):
     assert product_in_category.products[1].price == 50.0
     assert product_in_category.products[1].quantity == 10
 
-    assert product_in_category.total_categories == 1
+    assert product_in_category.category_count == 1
+    assert product_in_category.product_count == 0
