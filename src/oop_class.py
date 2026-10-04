@@ -16,7 +16,7 @@ class Product:
 
     @price.setter
     def price(self, new_price: float):
-        if new_price >= 0:
+        if new_price > 0:
             self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
@@ -61,18 +61,22 @@ class Category:
     def products(self):
         product_str = ""
         for product in self.__products:
-            product_str += f"{product.name}, {product.price}. Остаток: {product.quantity}.\n"
+            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
         return product_str
 
 
 if __name__ == "__main__":
     product1 = Product("Огурец", "Овощ", 100.0, 5)
     product2 = Product("Банан", "Фрукт", 50.0, 10)
+    product3 = Product("Хлеб", "Хлебобулочные изделия", 60.0, 8)
+    product4 = Product("Колбаса", "Мясное  зделие", 500.0, 12)
 
     # Создаём категорию и добавляем товары в неё
     category = Category("Фрукты", "Разные фрукты")
     category.add_product(product1)  # можно и в «Фрукты», логика не строгая, главное — в категорию
     category.add_product(product2)
+    category.add_product(product3)
+    category.add_product(product4)
 
     print(category.name)
     print(category.description)
