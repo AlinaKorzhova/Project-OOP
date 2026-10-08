@@ -27,6 +27,7 @@ def product_in_category(product1, product2):
         name="Фрукты",
         description="Разные фрукты"
     )
-    category.products.append(product1)
-    category.products.append(product2)
+    category.add_product(product1)  # можно и в «Фрукты», логика не строгая, главное — в категорию
+    category.add_product(product2)
     return category
+
