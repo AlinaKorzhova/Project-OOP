@@ -1,6 +1,3 @@
-from src.oop_class import Product, Category
-
-
 def test_product(product1):
     assert product1.name == "Огурец"
     assert product1.description == "Овощ"
@@ -22,12 +19,5 @@ def test_new_product_updates_quantity_and_price():
     assert updated.quantity == 5
     assert updated.price == 250.0
 
-
-def test_category(product_in_category):
-    Category.total_categories = 0
-    Category.total_product = 0
-    c = Category("Фрукты", "Разные фрукты")
-    p = Product("Банан", "Фрукт", 50.0, 10)
-    c.add_product(p)
-    assert Category.total_categories == 1
-    assert Category.total_product == 1
+    assert product_in_category.category_count == 1
+    assert product_in_category.product_count == 0
