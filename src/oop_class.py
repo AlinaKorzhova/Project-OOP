@@ -53,13 +53,10 @@ class Product:
 
 
 class Category:
-    name: str
-    description: str
-    products: list
-    total_categories = 0  # счетчик категорий
-    total_product = 0  # счетчик товаров
+    total_categories = 0
+    total_product = 0
 
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         self.name = name
         self.description = description
         self.__products = []
