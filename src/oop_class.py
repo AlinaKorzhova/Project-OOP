@@ -56,7 +56,7 @@ class Category:
     total_categories = 0
     total_product = 0
 
-    def __init__(self, name: str, description: str):
+    def __init__(self, name: str, description: str, products: list = None) -> None:
         self.name = name
         self.description = description
         self.__products = []
