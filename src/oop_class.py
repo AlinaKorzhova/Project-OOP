@@ -46,10 +46,10 @@ class Product:
     def total_cost(self) -> float:
         return self.price * self.quantity
 
-    def __add__(self, other: Product) -> float:
-        if isinstance(other, Product):
+    def __add__(self, other: Product) -> float | type[TypeError]:
+        if type(other) is Product:
             return self.total_cost() + other.total_cost()
-        return NotImplemented
+        return TypeError
 
 
 class Category:
@@ -63,8 +63,11 @@ class Category:
         Category.total_categories += 1
 
     def add_product(self, product: Product):
-        self.__products.append(product)
-        Category.total_product += 1
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.total_product += 1
+        else:
+            raise TypeError
 
     @property  # геттер
     def products(self):
@@ -98,3 +101,6 @@ if __name__ == "__main__":
     print("Всего категорий:", Category.total_categories)
     print("Всего товаров:", Category.total_product)
     print("\nТовары в категории:\n", category.products)
+
+    print(product1 + product2)
+
