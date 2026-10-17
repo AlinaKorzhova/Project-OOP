@@ -1,7 +1,8 @@
 import pytest
 from src.oop_class import Product, Category
-from src.Smartphone_class import Smartphone
-from src.LawnGrass_class import LawnGrass
+from src.smartphone_class import Smartphone
+from src.lawngrass_class import LawnGrass
+
 
 @pytest.fixture
 def product1():
@@ -25,10 +26,7 @@ def product2():
 
 @pytest.fixture
 def product_in_category(product1, product2):
-    category = Category(
-        name="Фрукты",
-        description="Разные фрукты"
-    )
+    category = Category(name="Фрукты", description="Разные фрукты")
     category.add_product(product1)  # можно и в «Фрукты», логика не строгая, главное — в категорию
     category.add_product(product2)
     return category

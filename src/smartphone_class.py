@@ -1,5 +1,6 @@
 from src.oop_class import Product
 
+
 class Smartphone(Product):
     def __init__(self, name, model, memory, color, efficiency, description, price, quantity):
         super().__init__(name, description, price, quantity)
@@ -27,4 +28,3 @@ if __name__ == "__main__":
     print(smartphone_product1.quantity)
 
     print(smartphone_product1 + smartphone_product2)
-
