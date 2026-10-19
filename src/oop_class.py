@@ -40,6 +40,47 @@ class Product:
         return new_product
 
 
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self, new_price: float):
+        if new_price > 0:
+            self.__price = new_price
+        else:
+            print("Цена не должна быть нулевая или отрицательная")
+
+    @classmethod
+    def new_product(cls, product_dict: dict, list_product: list):
+        name = product_dict["name"],
+        price = float(product_dict["price"],)
+        quantity = int(product_dict["quantity"])
+
+        for product in list_product:
+            if product.name == name:
+                product.quantity += quantity
+                if price > product.price:
+                    product.price = price
+                return product
+
+        # если товар не найден создается новый объект
+        new_product = cls(name=name, description=product_dict.get("description", ""), price=price, quantity=quantity)
+        list_product.append(new_product)
+        return new_product
+
+    def __str__(self):
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def total_cost(self) -> float:
+        return self.price * self.quantity
+
+    def __add__(self, other: Product) -> float:
+        if isinstance(other, Product):
+            return self.total_cost() + other.total_cost()
+        return NotImplemented
+
+
 class Category:
     category_count = 0
     product_count = 0
@@ -66,6 +107,23 @@ class Category:
         for product in self.__products:
             product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
         return product_str
+
+    def add_product(self, product: Product):
+        self.__products.append(product)
+        Category.total_product += 1
+
+    @property  # геттер
+    def products(self):
+        product_str = ""
+        for product in self.__products:
+            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+        return product_str
+
+    def __str__(self):
+        count_products = 0
+        for product in self.__products:
+            count_products += product.quantity
+        return f"{self.name}, количество продуктов: {count_products} шт."
 
 
 if __name__ == "__main__":
