@@ -64,8 +64,6 @@ if __name__ == '__main__':
         invalid_sum = smartphone1 + grass1
     except TypeError:
         print("Возникла ошибка TypeError при попытке сложения")
-    else:
-        print("Не возникла ошибка TypeError при попытке сложения")
 
     category_smartphones = Category("Смартфоны", "Высокотехнологичные смартфоны", [smartphone1, smartphone2])
     category_grass = Category("Газонная трава", "Различные виды газонной травы", [grass1, grass2])
@@ -80,5 +78,3 @@ if __name__ == '__main__':
         category_smartphones.add_product("Not a product")
     except TypeError:
         print("Возникла ошибка TypeError при добавлении не продукта")
-    else:
-        print("Не возникла ошибка TypeError при добавлении не продукта")
