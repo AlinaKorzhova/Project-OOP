@@ -45,9 +45,11 @@ class Product:
         return self.price * self.quantity
 
     def __add__(self, other: "Product") -> float | TypeError:
-        if isinstance(other, Product):
-            return self.total_cost() + other.total_cost()
-        return TypeError("Можно складывать только объекты Product")
+        try:
+            if isinstance(other, Product):
+                return self.total_cost() + other.total_cost()
+        except TypeError:
+            print("Можно складывать только объекты Product")
 
 
 class Category:
@@ -57,7 +59,6 @@ class Category:
     def __init__(self, name: str, description: str, products: list | None = None) -> None:
         self.name = name
         self.description = description
-        # ИСПРАВЛЕНО: используем приватный список __products для хранения объектов
         self.__products = products
 
         Category.category_count += 1
