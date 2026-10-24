@@ -9,8 +9,8 @@ class LawnGrass(Product):
         self.color = color
 
     def __add__(self, other: Product) -> float | type[TypeError]:
-        if type(other) is LawnGrass:
-            return self.total_cost() + other.total_cost()
+        if isinstance(other, LawnGrass):
+            return self.price * self.quantity + other.price * self.quantity
         return TypeError
 
 
