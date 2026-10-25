@@ -1,4 +1,26 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class BaseProduct(ABC):
+
+    @abstractmethod
+    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        pass
+
+    @property
+    @abstractmethod
+    def price(self) -> float:
+        pass
+
+
+class MixinLog:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        print(f"{self.__class__.__name__}({', '.join(repr(a) for a in args)})")
+
+
+class Product(MixinLog, BaseProduct):
+
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         self.name = name
         self.description = description
@@ -15,6 +37,7 @@ class Product:
             self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
+
 
     @classmethod
     def new_product(cls, product_dict: dict, list_product: list) -> "Product":
@@ -52,6 +75,7 @@ class Product:
             print("Можно складывать только объекты Product")
 
 
+
 class Category:
     category_count = 0
     product_count = 0
@@ -59,7 +83,7 @@ class Category:
     def __init__(self, name: str, description: str, products: list | None = None) -> None:
         self.name = name
         self.description = description
-        self.__products = products
+        self.__products = products if products is not None else []
 
         Category.category_count += 1
         Category.product_count += len(self.__products)
@@ -101,4 +125,4 @@ if __name__ == "__main__":
 
     print(Category.total_products())
     print("\nСписок товаров в категории:\n", category.products)
-    print("\nСтроковое представление категории:", str(category))
+    print("\nСписок категории:", str(category))
