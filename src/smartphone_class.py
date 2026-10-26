@@ -10,8 +10,8 @@ class Smartphone(Product):
         self.efficiency = efficiency
 
     def __add__(self, other: Product) -> float | type[TypeError]:
-        if type(other) is Smartphone:
-            return self.total_cost() + other.total_cost()
+        if isinstance(other, Smartphone):
+            return self.price * self.quantity + other.price * other.quantity
         return TypeError
 
 

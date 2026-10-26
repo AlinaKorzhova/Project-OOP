@@ -33,6 +33,11 @@ def product_in_category(product1, product2):
 
 
 @pytest.fixture
+def category_with_products(product1, product2):
+    cat = Category("Фрукты", "Разные фрукты", [product1, product2])
+    return cat
+
+@pytest.fixture
 def smartphone_product1():
     return Smartphone("Samsung", "S10", 256, "Зеленый", 6, "Сматрфон", 60000.0, 5)
 
