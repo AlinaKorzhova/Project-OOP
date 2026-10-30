@@ -1,4 +1,4 @@
-from pyexpat.errors import messages
+import pytest
 
 from src.lawngrass_class import LawnGrass
 from src.oop_class import Product
@@ -32,15 +32,27 @@ def test_category_initial_products(category_with_products, product1, product2):
     )
     assert category_with_products.products == expected_str
 
-def test_mixinlog(capsys):
+def test_mixinlog_prints_correct_message(capsys):
     Product("Огурец", "Овощ", 100.0, 5)
-    message = capsys.readouterr()
-    assert message.out.strip() == ""
+    out, _ = capsys.readouterr()
+
+    expected = "Product('Огурец', 'Овощ', 100.0, 5)\n"
+    assert out == expected
 
     LawnGrass("Овес", "Зерновая культура", 10, 10000, "Россия", "30 дней", "Золотой")
-    message = capsys.readouterr()
-    assert message.out.strip() == ""
+    out, _ = capsys.readouterr()
+
+    expected = "LawnGrass('Овес', 'Зерновая культура', 10, 10000)\n"
+    assert out == expected
 
     Smartphone("Samsung", "Сматрфон", 60000.0, 5, 6, "S10", 256, "Зеленый")
-    message = capsys.readouterr()
-    assert message.out.strip() == ""
+    out, _ = capsys.readouterr()
+
+    expected = "Smartphone('Samsung', 'Сматрфон', 60000.0, 5)\n"
+    assert out == expected
+
+
+def test_product_raises():
+    with pytest.raises(ValueError) as e_info:
+        Product("Огурец", "Овощ", 100.0, 0)
+
