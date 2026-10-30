@@ -22,10 +22,14 @@ class MixinLog:
 class Product(MixinLog, BaseProduct):
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        super().__init__(name, description, price, quantity)
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+
 
     @property
     def price(self) -> float:
@@ -112,12 +116,22 @@ class Category:
         count_products = sum(p.quantity for p in self.__products)
         return f"{self.name}, количество продуктов: {count_products} шт."
 
+    def middle_price(self):
+        """средний ценик"""
+        try:
+            total = sum(product.price for product in self.__products)
+            average = total / len(self.__products)
+            return average
+        except ZeroDivisionError:
+            return 0
+
 
 if __name__ == "__main__":
     product1 = Product("Огурец", "Овощ", 100.0, 5)
     product2 = Product("Банан", "Фрукт", 50.0, 10)
     product3 = Product("Хлеб", "Хлебобулочные изделия", 60.0, 8)
     product4 = Product("Колбаса", "Мясное изделие", 500.0, 12)
+    #product5 = Product("Колбаса", "Мясное изделие", 500.0, 0)
 
     category = Category("Фрукты", "Разные фрукты", [product1, product2])
     category.add_product(product3)
